@@ -6,6 +6,7 @@ function App() {
   
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   function handleSubmit(event) {
     event.preventDefault(); // previne que a tela seja recarregada ao enviar o formulário
@@ -30,6 +31,15 @@ function App() {
           setDescription(event.target.value)
         }} ></textarea>
         
+
+        <label htmlFor='imageUrl'>URL da imagem de capa</label>
+        <input type='text' id='imageUrl' placeholder='Cole aqui o endereço da imagem (URL)' value={imageUrl} onChange={(event) => {
+          setImageUrl(event.target.value)
+        }} ></input>
+
+
+        
+
       </form>
     </>
   )
