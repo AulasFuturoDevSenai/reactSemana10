@@ -9,7 +9,6 @@ function App() {
 
   function handleSubmit(event) {
     event.preventDefault(); // previne que a tela seja recarregada ao enviar o formulário
-    
   }
     
   return (
@@ -19,7 +18,7 @@ function App() {
         <p>Atualmente, você tem <strong>14 posts </strong>cadastrados</p>
       </section>
 
-      <form className="container-form">
+      <form className="container-form" onSubmit={handleSubmit}>
         <h2>Novo Post</h2>
         <label htmlFor="title">Título</label>
         <input type="text" id="title" placeholder="Título do post" value={title} onChange={(event) => {
@@ -30,6 +29,7 @@ function App() {
         <textarea id="description" placeholder="Descrição" value={description} onChange={(event) => {
           setDescription(event.target.value)
         }} ></textarea>
+        
       </form>
     </>
   )
