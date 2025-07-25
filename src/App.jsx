@@ -8,6 +8,7 @@ function App() {
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [publicDate, setPublicDate] = useState('');
+  const [category, setCategory] = useState('');
 
   function handleSubmit(event) {
   event.preventDefault(); // previne que a tela seja recarregada ao enviar o formulário
@@ -42,7 +43,18 @@ function App() {
     <input type='date' id='publicDate' placeholder='dd/mm/aaaa' value={publicDate} onChange={(event) => {
       setPublicDate(event.target.value)
     }}></input>
-    
+
+
+    <label htmlFor='category'>Categoria</label>
+    <select value={category} onChange={(event) => {
+      setCategory(event.target.value);
+   }}>
+    <option value="">Selecione o tipo</option>
+    <option value="artigo">Artigo</option>
+    <option value="noticia">Notícia</option>
+    <option value="tutorial">Tutorial</option>
+    <option value="entrevista">Entrevista</option>
+  </select>  
 
     </form>
   </>
