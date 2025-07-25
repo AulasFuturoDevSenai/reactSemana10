@@ -88,3 +88,22 @@ body {
 .container-form button:hover {
   background-color: #4686d2;
 }
+
+.container-form select {
+  width: 102%;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+}
+
+.container-form select:focus {
+  border-color: #5c9ded;
+  outline: none;
+}
