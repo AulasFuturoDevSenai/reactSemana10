@@ -2,6 +2,7 @@ import './App.css'
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+//import { useEffect } from 'react';
 
 function App() {
 
@@ -10,6 +11,7 @@ function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [publicDate, setPublicDate] = useState('');
   const [category, setCategory] = useState('');
+
 
   function handleSubmit(event) {
     event.preventDefault(); // previne que a tela seja recarregada ao enviar o formulário
@@ -45,7 +47,39 @@ function App() {
       return;
     }
 
+
+     //criar o objeto para salvar no localStorage
+  const newPost = {
+    title: title,
+    description: description,
+    imageUrl: imageUrl,
+    publicDate: publicDate,
+    category: category
+  };
+
+  //pegar o post que ja estão no local storage
+    let allPostInLocalStorage = localStorage.getItem("@Posts")
+
+  //obtem o array dos posts
+
+    allPostInLocalStorage = !allPostInLocalStorage ? [] : JSON.parse(allPostInLocalStorage)
+
+  //Insere no array do post
+    allPostInLocalStorage.push(newPost)
+    console.log(allPostInLocalStorage)
+
+  //Salvar o array atualizado no local storage
+    localStorage.setItem("@Posts", JSON.stringify(allPostInLocalStorage));
+
+
     toast.success("Post salvo com sucesso!");
+
+    //limpar os campos
+    setTitle("")
+    setDescription("")
+    setImageUrl("")
+    setPublicDate("")
+    setCategory("")
   }
 
   return (
@@ -114,4 +148,5 @@ function App() {
 }
 
 export default App;
+
 
