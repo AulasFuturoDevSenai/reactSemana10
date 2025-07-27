@@ -1,8 +1,8 @@
 import './App.css'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-//import { useEffect } from 'react';
+
 
 function App() {
 
@@ -11,6 +11,14 @@ function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [publicDate, setPublicDate] = useState('');
   const [category, setCategory] = useState('');
+
+  const [totalPosts, setTotalPosts] = useState(0);
+
+  useEffect (() => {
+    const postsInLocalStorage = JSON.parse(localStorage.getItem("@Posts")) || [];
+    setTotalPosts(postsInLocalStorage.length);
+ 
+  }, []);
 
 
   function handleSubmit(event) {
@@ -71,7 +79,11 @@ function App() {
   //Salvar o array atualizado no local storage
     localStorage.setItem("@Posts", JSON.stringify(allPostInLocalStorage));
 
+  //Atualiza o estado de total de posts
+    setTotalPosts(allPostInLocalStorage.length);
+  
 
+  //Mensagem de sucesso
     toast.success("Post salvo com sucesso!");
 
     //limpar os campos
@@ -86,7 +98,7 @@ function App() {
     <>
       <section className="App">
         <h1>Painel de Gerenciamento</h1>
-        <p>Atualmente, você tem <strong>14 posts</strong> cadastrados</p>
+        <p>Atualmente, você tem <strong>{totalPosts} posts</strong> cadastrados</p>
       </section>
 
       <form className="container-form" onSubmit={handleSubmit}>
