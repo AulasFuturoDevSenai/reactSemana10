@@ -1,24 +1,29 @@
 
 import Post from "./Post";
+import { useEffect, useState } from "react";
+
 
 function PostsLists() {
+    const [posts, setPosts] = useState([]);
+
+    //UseEffect para buscar do LocalStorage
+    useEffect(() => {
+        const dados = localStorage.getItem('posts');
+
+        if (dados) {
+            setPosts(JSON.parse(dados));
+        }
+    }, []);    
+
     return (
         <div>
-            <Post tipo='NOTÍCIA' 
-                titulo='5 Tendências Tech para 2026'
-                descricao="De computação quântica ao metaverso corporativo, conheça o que vem por aí."
-                data='09/07/2025'
-                />
-
-            <Post
-                tipo="ARTIGO"
-                titulo="Inteligência Artificial no Dia a Dia"
-                descricao="Como a IA está revolucionando serviços e impactando decisões em empresas e governos."
-                data="14/07/2025"
-            />
+            {posts.map((post, index) => (
+                <Post key={index} tipo={post.tipo} titulo={post.titulo} descricao={post.descricao} data={post.data} />
+            ))}
         </div>
-    );
-   
+    );    
+
+
 }
 
 export default PostsLists;
