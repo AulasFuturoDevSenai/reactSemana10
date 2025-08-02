@@ -2,6 +2,7 @@ import './App.css'
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PostsLists from './PostsLists'; 
 
 
 function App() {
@@ -11,14 +12,23 @@ function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [publicDate, setPublicDate] = useState('');
   const [category, setCategory] = useState('');
-
+  const [posts, setPosts] = useState([]);
   const [totalPosts, setTotalPosts] = useState(0);
 
   useEffect (() => {
     const postsInLocalStorage = JSON.parse(localStorage.getItem("@Posts")) || [];
+    setPosts(postsInLocalStorage);
     setTotalPosts(postsInLocalStorage.length);
  
   }, []);
+
+    function handleDeletePost(id) {
+    const updatedPosts = posts.filter(post => post.id !== id);
+    setPosts(updatedPosts);
+    setTotalPosts(updatedPosts.length);
+    localStorage.setItem("@Posts", JSON.stringify(updatedPosts));
+    toast.success("Post deleted successfully!");
+  }
 
 
   function handleSubmit(event) {
@@ -58,11 +68,12 @@ function App() {
 
      //criar o objeto para salvar no localStorage
   const newPost = {
-    title: title,
-    description: description,
-    imageUrl: imageUrl,
-    publicDate: publicDate,
-    category: category
+    id:Date.now(),
+    title,
+    description,
+    imageUrl,
+    publicDate,
+    category
   };
 
   //pegar o post que ja estão no local storage
@@ -154,6 +165,7 @@ function App() {
         <button type="submit">Salvar</button>
       </form>
 
+      <PostsLists posts={posts} handleDeletePost={handleDeletePost} />
       <ToastContainer />
     </>
   );

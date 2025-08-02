@@ -1,29 +1,23 @@
 
 import Post from "./Post";
-import { useEffect, useState } from "react";
 
 
-function PostsLists() {
-    const [posts, setPosts] = useState([]);
-
-    //UseEffect para buscar do LocalStorage
-    useEffect(() => {
-        const dados = localStorage.getItem('posts');
-
-        if (dados) {
-            setPosts(JSON.parse(dados));
-        }
-    }, []);    
-
-    return (
-        <div>
-            {posts.map((post, index) => (
-                <Post key={index} tipo={post.tipo} titulo={post.titulo} descricao={post.descricao} data={post.data} />
-            ))}
-        </div>
-    );    
-
-
+function PostsList({ posts, handleDelete }) {
+  return (
+    <div className="posts-list">
+      {posts.map((post) => (
+        <Post
+          key={post.id}
+          id={post.id}
+          title={post.title}
+          description={post.description}
+          publicDate={post.publicDate}
+          category={post.category}
+          handleDelete={handleDelete}
+        />
+      ))}
+    </div>
+  );
 }
 
-export default PostsLists;
+export default PostsList;

@@ -7,6 +7,6 @@ import PostsLists from './PostsLists.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PostsLists />
+    <App />
   </StrictMode>,
 )
