@@ -2,7 +2,7 @@ import './App.css'
 import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import PostsLists from './PostsLists'; 
+import PostsList from './PostsList'; 
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
  
   }, []);
 
-    function handleDeletePost(id) {
+    function handleDelete(id) {
     const updatedPosts = posts.filter(post => post.id !== id);
     setPosts(updatedPosts);
     setTotalPosts(updatedPosts.length);
@@ -165,7 +165,7 @@ function App() {
         <button type="submit">Salvar</button>
       </form>
 
-      <PostsLists posts={posts} handleDeletePost={handleDeletePost} />
+      <PostsList posts={posts} handleDelete={handleDelete} />
       <ToastContainer />
     </>
   );
